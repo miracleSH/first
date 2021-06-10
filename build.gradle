@@ -24,12 +24,10 @@ repositories {
 }
 
 dependencies {
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
     compile('org.springframework.boot:spring-boot-starter-web')
     testCompile('org.springframework.boot:spring-boot-starter-test')
+    compile('org.projectlombok:lombok')
+    compileOnly("org.projectlombok:lombok:1.18.10") /*gradle 5.대 이상 사용 시 추가*/
+    annotationProcessor("org.projectlombok:lombok:1.18.10") /*gradle 5.대 이상 사용 시 추가*/
 }
 
-test {
-    useJUnitPlatform()
-}
