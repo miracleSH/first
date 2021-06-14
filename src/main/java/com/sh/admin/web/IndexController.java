@@ -1,8 +1,11 @@
 package com.sh.admin.web;
 
+import com.sh.admin.config.auth.LoginUser;
+import com.sh.admin.config.auth.dto.SessionUser;
 import com.sh.admin.web.domain.posts.PostService;
 import com.sh.admin.web.domain.posts.Posts;
 import com.sh.admin.web.dto.PostResponseDto;
+import javax.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,10 +17,16 @@ import org.springframework.web.bind.annotation.PathVariable;
 public class IndexController {
 
     private final PostService postService;
+    private final HttpSession httpSession;
 
     @GetMapping("/")
-    public String index(Model model){
+    public String index(Model model, @LoginUser SessionUser user){
         model.addAttribute("posts", postService.findAllDesc());
+
+        if(user != null){
+            model.addAttribute("userName", user.getName());
+        }
+
         return "index";
     }
 
